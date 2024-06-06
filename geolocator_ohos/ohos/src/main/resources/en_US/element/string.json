@@ -1,0 +1,8 @@
+{
+  "string": [
+    {
+      "name": "permission_location",
+      "value": "we need location permission to calculate then exact time"
+    }
+  ]
+}

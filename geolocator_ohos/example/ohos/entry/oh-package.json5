@@ -1,0 +1,12 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "geolocator_ohos": "file:../har/geolocator_ohos.har",
+    "url_launcher_ohos": "file:../har/url_launcher_ohos.har"
+  }
+}

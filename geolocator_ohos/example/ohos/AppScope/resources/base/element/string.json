@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "geolocator_ohos_example"
+    },
+    {
+      "name": "permission_location",
+      "value": "计算时辰需要位置权限"
+    }
+  ]
+}

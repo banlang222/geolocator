@@ -1,0 +1,8 @@
+{
+  "string": [
+    {
+      "name": "permission_location",
+      "value": "需要位置权限计算本地准确时辰"
+    }
+  ]
+}
