@@ -1,5 +1,8 @@
 # geolocator_android
 
+LocationMangerClient.determineProvider 调整了顺序
+GeoLocationManager.isLocationServiceEnabled 强制使用AndroidLocationManager
+
 [![pub package](https://img.shields.io/pub/v/geolocator.svg)](https://pub.dartlang.org/packages/geolocator) ![Build status](https://github.com/Baseflow/flutter-geolocator/workflows/geolocator_android/badge.svg?branch=master) [![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/tenhobi/effective_dart)
 
 The official Android implementation of the [geolocator](https://pub.dev/packages/geolocator) plugin by [Baseflow](https://baseflow.com).
