@@ -75,7 +75,7 @@ export default class MethodCallHandlerImpl implements MethodCallHandler {
 
   private onCheckPermission(result: MethodResult) {
     Log.d(TAG, "check permission");
-    if(this.location?.checkPermission()) {
+    if(this.location?.checkAccuracyPermission()) {
       result.success(2);
     } else {
       result.success(0);
@@ -121,11 +121,17 @@ export default class MethodCallHandlerImpl implements MethodCallHandler {
     if(this.location) {
       this.location.getLocationResult = result;
       if(!this.location.checkPermission()){
+        Log.d(TAG, "oo no permission");
         this.location.requestPermissions();
-      } else if(!this.location.checkAccuracyPermission()) {
-        result.error("PERMISSION_DENIED", "Location permission denied", null);
-        this.location.getLocationResult = null;
-      } else {
+      }
+
+      //else if(!this.location.checkAccuracyPermission()) {
+     //   Log.d(TAG, "oo no accuracy permission");
+     //   result.error("PERMISSION_DENIED", "Location permission denied", null);
+     //   this.location.getLocationResult = null;
+     // }
+      else {
+        Log.d(TAG, "oo start request location");
         this.location.startRequestLocation();
       }
     }

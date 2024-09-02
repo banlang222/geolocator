@@ -1,4 +1,5 @@
 {
+  "modelVersion": "5.0.0",
   "name": "geolocator_ohos_example",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
@@ -12,6 +13,9 @@
     "@ohos/hypium": "1.0.6"
   },
   "overrides": {
-    "@ohos/flutter_ohos": "file:./har/flutter.har"
+    "@ohos/flutter_ohos": "file:./har/flutter.har",
+    "url_launcher_ohos": "file:./har/url_launcher_ohos.har",
+    "geolocator_ohos": "file:./har/geolocator_ohos.har",
+    "@ohos/flutter_module": "file:./entry"
   }
 }

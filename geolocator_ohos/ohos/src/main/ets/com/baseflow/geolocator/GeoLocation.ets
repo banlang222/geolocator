@@ -54,25 +54,29 @@ export default class Geolocation {
       this.tokenId = bundleInfo.appInfo.accessTokenId;
     }
   }
+
+  //检查位置权限
   checkPermission() : boolean {
     this.getTokenId();
     let locationPermissionState = this.atManager?.verifyAccessTokenSync(this.tokenId, "ohos.permission.APPROXIMATELY_LOCATION");
     return locationPermissionState == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
   }
 
+  //检查精确位置权限
   checkAccuracyPermission(): boolean {
     this.getTokenId();
     let locationPermissionState = this.atManager?.verifyAccessTokenSync(this.tokenId, "ohos.permission.LOCATION");
     return locationPermissionState == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
   }
 
+  //请求权限
   requestPermissions() : void {
     if(!this.ability || !(this.result || this.getLocationResult || this.events != null)) {
       Log.d(TAG, "");
       return;
     }
     //有权限，无需继续请求
-    if(this.checkPermission()) {
+    if(this.checkAccuracyPermission()) {
       this.result?.success(2);
       return;
     }
@@ -82,7 +86,7 @@ export default class Geolocation {
     ];
     Log.d(TAG, "request permission from user");
     this.atManager?.requestPermissionsFromUser(this.ability.context, array).then((data)=>{
-      if(data.authResults[0] == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+      if(data.authResults[1] == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         Log.d(TAG, "result:PERMISSION_GRANTED");
         if(this.getLocationResult != null || this.events != null) {
           this.startRequestLocation();
@@ -90,14 +94,14 @@ export default class Geolocation {
           this.result?.success(2);
           this.result = null;
         }
-      } else if(data.authResults[0] == abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+      } else if(data.authResults[1] == abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
         Log.d(TAG, "result:PERMISSION_DENIED_NEVER_ASK");
         this.sendError("PERMISSION_DENIED_NEVER_ASK", "Location permission denied forever, please open app settings", null);
         this.result?.success(1);
         this.result = null;
       } else {
         Log.d(TAG, "result:PERMISSION_DENIED");
-        this.sendError("PERMISSION_DENIED", "Location permission denied", null);
+        this.sendError("PERMISSION_DENIED", "Location permission denied aa", null);
         this.result?.success(0);
         this.result = null;
       }
@@ -127,7 +131,7 @@ export default class Geolocation {
     }).catch((err: BusinessError)=>{
       Log.e(TAG, "GET_CURRENT_POSITION_ERROR:" + JSON.stringify(err));
     })
-    if(!this.checkPermission()) {
+    if(!this.checkAccuracyPermission()) {
       return;
     }
     //存在stream通道，监听位置变化

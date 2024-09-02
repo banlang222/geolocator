@@ -39,7 +39,7 @@ export default class StreamHandlerImpl implements StreamHandler {
       return;
     }
     this.location.events = events;
-    if(!this.location.checkPermission()) {
+    if(!this.location.checkAccuracyPermission()) {
       Log.d(TAG, "no permission, so, request");
       this.location.requestPermissions();
     } else if(!this.location.checkAccuracyPermission()) {
